@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="checkout-page">
+  <div class="container">
+
+    <!-- EN-TÊTE -->
+    <div class="page-header">
+      <div class="header-badge">
+        <i class="fas fa-lock"></i>
+        Paiement Sécurisé
+      </div>
+      <h1>Finaliser la Commande</h1>
+      <p>Remplissez vos informations pour recevoir votre commande</p>
+    </div>
+
+    <div class="checkout-content">
+
+      <!-- FORMULAIRE -->
+      <div class="checkout-form">
+        <div class="form-card">
+          <div class="form-card-header">
+            <i class="fas fa-user"></i>
+            <h3>Informations de livraison</h3>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-user"></i>
+              Nom complet
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="fullName"
+              name="name"
+              placeholder="Ex: Siwar Ben Ali"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-phone"></i>
+              Téléphone
+            </label>
+            <input
+              type="tel"
+              [(ngModel)]="phone"
+              name="phone"
+              placeholder="Ex: +216 90 000 000"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-map-marker-alt"></i>
+              Adresse complète
+            </label>
+            <textarea
+              [(ngModel)]="address"
+              name="address"
+              rows="3"
+              placeholder="Rue, ville, gouvernorat..."
+              required></textarea>
+          </div>
+        </div>
+
+        <!-- BOUTONS -->
+        <div class="action-buttons">
+          <button class="btn-whatsapp" (click)="sendWhatsApp()">
+            <i class="fab fa-whatsapp"></i>
+            Commander via WhatsApp
+          </button>
+          <button class="btn-confirm" (click)="submitOrder()" [disabled]="submitting">
+            <i class="fas fa-check" *ngIf="!submitting"></i>
+            <i class="fas fa-spinner fa-spin" *ngIf="submitting"></i>
+            {{ submitting ? 'Traitement...' : 'Valider la commande' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- RÉSUMÉ COMMANDE -->
+      <div class="order-summary">
+        <div class="summary-card">
+          <div class="summary-header">
+            <i class="fas fa-shopping-bag"></i>
+            <h3>Récapitulatif</h3>
+          </div>
+
+          <div class="summary-items">
+            <div class="summary-item" *ngFor="let item of items">
+              <div class="item-image">
+                <img [src]="item.product.image" [alt]="item.product.name">
+              </div>
+              <div class="item-details">
+                <span class="item-name">{{ item.product.name }}</span>
+                <span class="item-qty">Qté: {{ item.quantity }}</span>
+              </div>
+              <span class="item-price">{{ item.product.price * item.quantity }} TND</span>
+            </div>
+          </div>
+
+          <div class="summary-totals">
+            <div class="total-row">
+              <span>Sous-total</span>
+              <span>{{ total }} TND</span>
+            </div>
+            <div class="total-row">
+              <span>
+                <i class="fas fa-truck"></i>
+                Livraison
+              </span>
+              <span>7 TND</span>
+            </div>
+            <div class="total-row final">
+              <span>Total</span>
+              <span>{{ total + 7 }} TND</span>
+            </div>
+          </div>
+
+          <div class="summary-badges">
+            <span><i class="fas fa-shield-alt"></i> Paiement à la livraison</span>
+            <span><i class="fas fa-truck"></i> Livraison rapide</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

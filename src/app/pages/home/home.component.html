@@ -1,0 +1,233 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="home">
+
+  <!-- SECTION HÉRO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="badge">
+          <i class="fas fa-leaf"></i>
+          100% Bio & Naturel
+        </div>
+        <h1>Beauté<br>Méditerranéenne,<br><span class="highlight">Naturellement Vôtre</span></h1>
+        <p>Découvrez les secrets ancestraux des soins méditerranéens avec notre collection artisanale aux figues, à l'huile d'olive et aux plantes pures.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary">
+            <i class="fas fa-shopping-bag"></i>
+            Découvrir nos produits
+          </button>
+          <button class="btn btn-secondary" (click)="showStory = true">
+            <i class="fas fa-book"></i>
+            Notre Histoire
+          </button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/serumcapillaire.jpeg" alt="Produits de beauté">
+      </div>
+    </div>
+  </section>
+
+  <!-- CARACTÉRISTIQUES -->
+  <section class="features">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <span class="feature-number">100%</span>
+      <span class="feature-label">Naturel</span>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <span class="feature-number">Sans</span>
+      <span class="feature-label">Cruauté</span>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-recycle"></i>
+      </div>
+      <span class="feature-number">Éco</span>
+      <span class="feature-label">Responsable</span>
+    </div>
+  </section>
+
+  <!-- CATÉGORIES -->
+  <section class="categories">
+    <h2>Acheter par Catégorie</h2>
+    <p class="section-subtitle">Explorez notre collection de produits de beauté bio et artisanaux</p>
+    <div class="category-grid">
+
+      <div class="category-card" style="background: linear-gradient(135deg, #f3e5f5, #e8d4f0)">
+        <div class="category-icon-box">
+          <i class="fas fa-spray-can"></i>
+        </div>
+        <h3>Soin Capillaire</h3>
+        <p>Shampooing, Après-shampoing & Sérum</p>
+        <!-- <a href="#" class="category-link">Explorer →</a> -->
+      </div>
+
+      <div class="category-card" style="background: linear-gradient(135deg, #e8f5e9, #d4e8d4)">
+        <div class="category-icon-box">
+          <i class="fas fa-water"></i>
+        </div>
+        <h3>Soin du Corps</h3>
+        <p>Nourrir & Adoucir</p>
+        <!-- <a href="#" class="category-link">Explorer →</a> -->
+      </div>
+
+      <div class="category-card" style="background: linear-gradient(135deg, #fffde7, #f9f5d4)">
+        <div class="category-icon-box">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Soin du Visage</h3>
+        <p>Éclat & Radiance</p>
+        <!-- <a href="#" class="category-link">Explorer →</a> -->
+      </div>
+
+      <div class="category-card" style="background: linear-gradient(135deg, #e0f2f1, #d4e8e7)">
+        <div class="category-icon-box">
+          <i class="fas fa-droplet"></i>
+        </div>
+        <h3>Huiles Essentielles</h3>
+        <p>Pures & Naturelles</p>
+        <!-- <a href="#" class="category-link">Explorer →</a> -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUITS VEDETTES -->
+  <section class="featured">
+    <h2>Produits Vedettes</h2>
+    <p class="section-subtitle">Découvrez nos essentiels de beauté méditerranéenne les plus appréciés</p>
+
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="products-grid" *ngIf="!loading && products.length > 0">
+      <div class="product-card" *ngFor="let product of products.slice(0, 4)">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name">
+          <span class="badge-product">Meilleure Vente</span>
+        </div>
+        <div class="product-info">
+          <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.9</span>
+          </div>
+          <h3>{{ product.name }}</h3>
+          <p class="description">{{ product.category || 'Produit de beauté' }}</p>
+          <p class="price">{{ product.price }} TND</p>
+          <button class="btn-add" (click)="addToCart(product)">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Ajouter au panier</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-all">
+      <a href="/products" class="btn btn-outline">
+        <i class="fas fa-arrow-right"></i>
+        Voir tous les produits
+      </a>
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS CHOISIR -->
+  <section class="why-choose">
+    <h2>Pourquoi Choisir Beauty Bloom</h2>
+    <p class="section-subtitle">Notre engagement envers la pureté, la durabilité et votre bien-être</p>
+    <div class="benefits-grid">
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>100% Bio</h3>
+        <p>Ingrédients biologiques certifiés issus de fermes durables</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Sans Cruauté</h3>
+        <p>Jamais testé sur les animaux. Fabriqué éthiquement avec amour</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <h3>Durable</h3>
+        <p>Emballages écologiques et production neutre en carbone</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-award"></i>
+        </div>
+        <h3>Testé Dermatologiquement</h3>
+        <p>Sûr pour tous les types de peau, résultats cliniquement prouvés</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NOTRE HISTOIRE -->
+  <section class="story">
+    <div class="story-content">
+
+      <div class="story-image">
+        <img src="https://res.cloudinary.com/djv1rumia/image/upload/v1780792054/figues_v8zavr.jpg" alt="Feuilles d'olivier">
+      </div>
+
+      <div class="story-text">
+        <div class="story-label">Notre Histoire</div>
+        <h2>Enracinée dans la<br>Tradition<br><span class="highlight">Méditerranéenne</span></h2>
+        <p>Inspirée par les rivages ensoleillés de la Méditerranée, notre histoire a commencé avec une conviction simple : la nature détient les secrets les plus purs d'une beauté rayonnante.</p>
+        <p>Nous fabriquons chaque produit à la main avec des figues biologiques et de l'huile d'olive pressée à froid. Chaque pot est une célébration des rituels de beauté ancestraux, des pratiques durables et du pouvoir nourrissant de la nature.</p>
+        <div class="story-stats">
+          <div class="stat">
+            <strong>100%</strong>
+            <span>Ingrédients Bio</span>
+          </div>
+          <div class="stat">
+            <strong>Zéro</strong>
+            <span>Produit Chimique Nocif</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- POPUP NOTRE HISTOIRE -->
+  <div class="popup-overlay" *ngIf="showStory" (click)="showStory = false">
+    <div class="popup-card" (click)="$event.stopPropagation()">
+      <button class="popup-close" (click)="showStory = false">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="popup-icon">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <h3>Notre Histoire</h3>
+      <p>
+        Inspirée par les rivages ensoleillés de la Méditerranée, Beauty Bloom est née d'une conviction simple :
+        la nature détient les secrets les plus purs d'une beauté rayonnante. Nous fabriquons chaque produit
+        à la main avec des figues biologiques et de l'huile d'olive pressée à froid, provenant de petits
+        domaines familiaux. Chaque flacon est une célébration des rituels de beauté ancestraux et du pouvoir
+        nourrissant de la nature.
+      </p>
+    </div>
+  </div>
+
+</div>

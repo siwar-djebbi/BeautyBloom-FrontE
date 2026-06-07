@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="cart-page">
+  <div class="container">
+
+    <!-- EN-TÊTE -->
+    <div class="page-header">
+      <h1>Mon Panier</h1>
+      <p *ngIf="items.length > 0">{{ items.length }} article(s) dans votre panier</p>
+    </div>
+
+    <!-- PANIER VIDE -->
+    <div *ngIf="items.length === 0" class="empty-cart">
+      <div class="empty-icon">
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+      <h2>Votre panier est vide</h2>
+      <p>Découvrez nos produits de beauté naturelle</p>
+      <a routerLink="/" class="btn-primary">
+        <i class="fas fa-arrow-left"></i>
+        Continuer mes achats
+      </a>
+    </div>
+
+    <!-- PANIER REMPLI -->
+    <div *ngIf="items.length > 0" class="cart-content">
+
+      <!-- ARTICLES -->
+      <div class="cart-items">
+        <div class="cart-item" *ngFor="let item of items">
+          <div class="item-image">
+            <img [src]="item.product.image" [alt]="item.product.name">
+          </div>
+
+          <div class="item-details">
+            <h3>{{ item.product.name }}</h3>
+            <span class="item-category">{{ item.product.category }}</span>
+            <p class="item-price">{{ item.product.price }} TND</p>
+          </div>
+
+          <div class="item-qty">
+            <button class="qty-btn" (click)="updateQty(item.product.id, item.quantity - 1)">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span>{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="updateQty(item.product.id, item.quantity + 1)">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <div class="item-subtotal">
+            <strong>{{ item.product.price * item.quantity }} TND</strong>
+            <button class="btn-remove" (click)="remove(item.product.id)">
+              <i class="fas fa-trash-alt"></i>
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RÉSUMÉ -->
+      <div class="cart-summary">
+        <div class="summary-card">
+          <h3>Récapitulatif</h3>
+
+          <div class="summary-lines">
+            <div class="summary-line">
+              <span>Sous-total</span>
+              <span>{{ total }} TND</span>
+            </div>
+            <div class="summary-line">
+              <span><i class="fas fa-truck"></i> Livraison</span>
+              <span>7 TND</span>
+            </div>
+            <div class="summary-line total">
+              <span>Total</span>
+              <span>{{ total + 7 }} TND</span>
+            </div>
+          </div>
+
+          <button class="btn-checkout" (click)="checkout()">
+            <i class="fas fa-arrow-right"></i>
+            Passer la commande
+          </button>
+
+          <a routerLink="/" class="btn-continue">
+            <i class="fas fa-arrow-left"></i>
+            Continuer mes achats
+          </a>
+
+          <div class="summary-badges">
+            <span><i class="fas fa-shield-alt"></i> Paiement à la livraison</span>
+            <span><i class="fas fa-leaf"></i> Produits 100% naturels</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  // Remplacer par l'URL réelle de votre API en production
-  apiUrl: 'https://votre-api-backend.com/api'
+  apiUrl: 'https://beautybloom-backe-production.up.railway.app/api'
 };
